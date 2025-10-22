@@ -9,14 +9,16 @@ type Grid struct {
 	data [][]bool
 }
 
-func NewArray(size uint) Grid {
+func NewGrid(size uint) Grid {
 	grid := Grid{
 		size: size,
 		data: make([][]bool, size),
 	}
 
+	for i := range grid.data {
+		grid.data[i] = make([]bool, size)
+	}
 	return grid
-
 }
 
 func Display(grid Grid) string {
@@ -25,13 +27,8 @@ func Display(grid Grid) string {
 
 }
 
-func CountAliveNegighbours(grid, x, y) uint {
-	//corner
-
-	//edge
-	//middle
-
-	return count
+func CountAliveNegighbours(grid Grid, x uint, y uint) uint {
+	return 0
 }
 
 func Rungeneration() {
@@ -40,7 +37,8 @@ func Rungeneration() {
 
 func main() {
 
-	newGrid := NewArray(size)
+	newGrid := NewGrid(uint(3))
+	fmt.Println(newGrid)
 	Display(newGrid)
 	fmt.Println(Display(newGrid))
 }

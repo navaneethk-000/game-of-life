@@ -6,7 +6,7 @@ import (
 )
 
 func TestNewGrid(t *testing.T) {
-	size := uint(5)
+	size := uint(3)
 	actual := NewGrid(size)
 
 	expected := Grid{
@@ -23,7 +23,7 @@ func TestNewGrid(t *testing.T) {
 	}
 
 	if actual.size != expected.size {
-		t.Errorf("Expected size : %d but got %v", actual.size)
+		t.Errorf("Expected size : %d but got %d", expected.size, actual.size)
 	}
 
 }
