@@ -27,3 +27,18 @@ func TestNewGrid(t *testing.T) {
 	}
 
 }
+
+func TestDisplayGrid(t *testing.T) {
+	size := 6
+	newGrid := NewGrid(uint(size))
+	newGrid.data[0][0] = true
+	actual := DisplayGrid(newGrid)
+	expected :=
+		"* x x \n" +
+			"x x x \n" +
+			"x x x \n"
+
+	if actual != expected {
+		t.Errorf("Expected %v but got %v", expected, actual)
+	}
+}
