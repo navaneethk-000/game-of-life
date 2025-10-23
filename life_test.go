@@ -29,7 +29,7 @@ func TestNewGrid(t *testing.T) {
 }
 
 func TestDisplayGrid(t *testing.T) {
-	size := 6
+	size := 3
 	newGrid := NewGrid(uint(size))
 	newGrid.data[0][0] = true
 	actual := DisplayGrid(newGrid)
@@ -39,6 +39,25 @@ func TestDisplayGrid(t *testing.T) {
 			"x x x \n"
 
 	if actual != expected {
-		t.Errorf("Expected %v but got %v", expected, actual)
+		t.Errorf("Expected \n%v but got \n%v", expected, actual)
+	}
+}
+func TestCountAliveNeighbourTopLeftCorner(t *testing.T) {
+	grid := NewGrid(5, 0, 1)
+	actual := CountAliveNeighbours(grid, 0, 0)
+
+	if actual != 1 {
+		t.Errorf("Expected neighbour count to be 1, but got %d", actual)
+	}
+	grid = NewGrid(5, 0, 1, 1, 1)
+	actual = CountAliveNeighbours(grid, 0, 0)
+	if actual != 2 {
+		t.Errorf("Expected neighbour count to be 2, but got %d", actual)
+	}
+
+	grid = NewGrid(5, 0, 1, 1, 1, 1, 0)
+	actual = CountAliveNeighbours(grid, 0, 0)
+	if actual != 3 {
+		t.Errorf("Expected neighbour count to be 3, but got %d", actual)
 	}
 }
