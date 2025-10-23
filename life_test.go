@@ -329,3 +329,13 @@ func TestRule3(t *testing.T) {
 		t.Errorf("Expected %v but got %v!\n", expectedNewGrid, actualNewGrid)
 	}
 }
+
+func TestRule4(t *testing.T) {
+	//Any dead cell with exactly three live neighbours becomes a live cell
+	grid := NewGrid(4, 1, 1, 0, 0, 2, 0, 2, 1, 2, 2)
+	actualNewGrid := RunGeneration(grid)
+	expectedNewGrid := NewGrid(4, 2, 0, 2, 1, 2, 2, 1, 2, 3, 1)
+	if !reflect.DeepEqual(actualNewGrid, expectedNewGrid) {
+		t.Errorf("Expected %v but got %v!\n", expectedNewGrid, actualNewGrid)
+	}
+}
