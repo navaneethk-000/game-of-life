@@ -114,6 +114,8 @@ func RunGeneration(grid Grid) Grid {
 					ret.data[i][j] = false
 				} else if aliveNeighbours == 2 || aliveNeighbours == 3 {
 					ret.data[i][j] = true
+				} else if aliveNeighbours > uint(3) {
+					ret.data[i][j] = false
 				}
 			}
 		}
