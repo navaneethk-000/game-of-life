@@ -301,6 +301,7 @@ func TestCountAliveNeighboursMiddle(t *testing.T) {
 }
 
 func TestRule1(t *testing.T) {
+	//Any live cell with fewer than two live neighbors dies
 	grid := NewGrid(4, 1, 1, 0, 0)
 	actualNewGrid := RunGeneration(grid)
 	expectedNewGrid := NewGrid(4)
@@ -310,9 +311,20 @@ func TestRule1(t *testing.T) {
 }
 
 func TestRule2(t *testing.T) {
-	grid := NewGrid(5, 1, 2, 2, 1, 2, 2, 3, 2)
+	// Any live cell with two or three live neighbors lives on.
+	grid := NewGrid(4, 1, 1, 0, 0, 2, 0, 2, 1)
 	actualNewGrid := RunGeneration(grid)
-	expectedNewGrid := NewGrid(5, 1, 2, 2, 1, 2, 2, 3, 2)
+	expectedNewGrid := NewGrid(4, 1, 1, 2, 0, 2, 1)
+	if !reflect.DeepEqual(actualNewGrid, expectedNewGrid) {
+		t.Errorf("Expected %v but got %v!\n", expectedNewGrid, actualNewGrid)
+	}
+}
+
+func TestRule3(t *testing.T) {
+	// Any live cell with more than three live neighbors dies.
+	grid := NewGrid(4, 1, 1, 0, 0, 2, 0, 2, 1, 2, 2)
+	actualNewGrid := RunGeneration(grid)
+	expectedNewGrid := NewGrid(4, 2, 0, 2, 1, 2, 2)
 	if !reflect.DeepEqual(actualNewGrid, expectedNewGrid) {
 		t.Errorf("Expected %v but got %v!\n", expectedNewGrid, actualNewGrid)
 	}
