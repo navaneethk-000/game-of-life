@@ -45,26 +45,21 @@ func DisplayGrid(grid Grid) string {
 
 }
 
-// func CountNeighbours(grid Grid, x uint, y uint) uint {
-
-// 	return 0
-// }
+func b2i(b bool) uint {
+	if b {
+		return 1
+	}
+	return 0
+}
 
 func CountAliveNeighbours(grid Grid, x uint, y uint) uint {
-
-	// size := int(grid.size)
-	var count uint
-	for row := int(x) - 1; row <= int(x)+1; row++ {
-
-		for col := int(y) - 1; col <= int(y)+1; col++ {
-			if row == int(x) && col == int(y) {
-				continue
-			}
-			count++
-
-		}
+	if grid.size == 1 {
+		return uint(0)
 	}
-	return count
+	if x == 0 && y == 0 { //top left corner
+		return b2i(grid.data[x][y+1]) + b2i(grid.data[x+1][y]) + b2i(grid.data[x+1][y+1])
+	}
+	return 0
 }
 
 func Rungeneration() {
