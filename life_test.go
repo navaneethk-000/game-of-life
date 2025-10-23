@@ -185,3 +185,35 @@ func TestCountAliveNeighboursBottomEdge(t *testing.T) {
 		t.Errorf("Expected neighbour count to be 5, but got %d", actual)
 	}
 }
+
+func TestCountAliveNeighboursLeftEdge(t *testing.T) {
+	grid := NewGrid(5, 1, 0)
+	actual := CountAliveNeighbours(grid, 2, 0)
+
+	if actual != 1 {
+		t.Errorf("Expected neighbour count to be 1, but got %d", actual)
+	}
+	grid = NewGrid(5, 1, 0, 1, 1)
+	actual = CountAliveNeighbours(grid, 2, 0)
+	if actual != 2 {
+		t.Errorf("Expected neighbour count to be 2, but got %d", actual)
+	}
+
+	grid = NewGrid(5, 1, 0, 1, 1, 2, 1)
+	actual = CountAliveNeighbours(grid, 2, 0)
+	if actual != 3 {
+		t.Errorf("Expected neighbour count to be 3, but got %d", actual)
+	}
+
+	grid = NewGrid(5, 1, 0, 1, 1, 2, 1, 3, 1)
+	actual = CountAliveNeighbours(grid, 2, 0)
+	if actual != 4 {
+		t.Errorf("Expected neighbour count to be 4, but got %d", actual)
+	}
+
+	grid = NewGrid(5, 1, 0, 1, 1, 2, 1, 3, 1, 3, 0)
+	actual = CountAliveNeighbours(grid, 2, 0)
+	if actual != 5 {
+		t.Errorf("Expected neighbour count to be 5, but got %d", actual)
+	}
+}
