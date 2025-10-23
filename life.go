@@ -102,8 +102,22 @@ func CountAliveNeighbours(grid Grid, x uint, y uint) uint {
 	return b2i(grid.data[x-1][y-1]) + b2i(grid.data[x-1][y]) + b2i(grid.data[x-1][y+1]) + b2i(grid.data[x][y-1]) + b2i(grid.data[x][y+1]) + b2i(grid.data[x+1][y-1]) + b2i(grid.data[x+1][y]) + b2i(grid.data[x+1][y+1])
 }
 
-func Rungeneration() {
+func RunGeneration(grid Grid) Grid {
+	ret := NewGrid(grid.size)
 
+	for i := 0; i < int(grid.size); i++ {
+		for j := 0; j < int(grid.size); j++ {
+			aliveNeighbours := CountAliveNeighbours(grid, uint(i), uint(j))
+
+			if grid.data[i][j] {
+				if aliveNeighbours < uint(2) {
+					ret.data[i][j] = false
+				}
+			}
+		}
+
+	}
+	return ret
 }
 
 func main() {
