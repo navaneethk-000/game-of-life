@@ -299,3 +299,12 @@ func TestCountAliveNeighboursMiddle(t *testing.T) {
 		t.Errorf("Expected neighbour count to be 8, but got %d", actual)
 	}
 }
+
+func TestRule1(t *testing.T) {
+	grid := NewGrid(4, 1, 1, 0, 0)
+	actualNewGrid := runGeneration(grid)
+	expectedNewGrid := NewGrid(4)
+	if !reflect.DeepEqual(actualNewGrid, expectedNewGrid) {
+		t.Errorf("Expected %v but got %v!\n", expectedNewGrid, actualNewGrid)
+	}
+}
