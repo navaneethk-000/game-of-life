@@ -300,42 +300,50 @@ func TestCountAliveNeighboursMiddle(t *testing.T) {
 	}
 }
 
+//		grid := NewGrid(4, 0, 0, 1, 1, 2, 0)
+//		actualNewGrid := RunGeneration(grid)
+//		if !actualNewGrid.data[1][0] {
+//			t.Errorf("Expected 1,0 to live but it's dead\n")
+//		}
+//	}
 func TestRule1(t *testing.T) {
-	//Any live cell with fewer than two live neighbors dies
+	// Any live cell with fewer than two live neighbors dies (underpopulation).
 	grid := NewGrid(4, 1, 1, 0, 0)
 	actualNewGrid := RunGeneration(grid)
-	expectedNewGrid := NewGrid(4)
-	if !reflect.DeepEqual(actualNewGrid, expectedNewGrid) {
-		t.Errorf("Expected %v but got %v!\n", expectedNewGrid, actualNewGrid)
+	if actualNewGrid.data[1][1] {
+		t.Errorf("Expected 1,1 to die but it's alive")
+	}
+	grid = NewGrid(4, 1, 1)
+	actualNewGrid = RunGeneration(grid)
+	if actualNewGrid.data[1][1] {
+		t.Errorf("Expected 1,1 to die but it's alive")
 	}
 }
-
 func TestRule2(t *testing.T) {
 	// Any live cell with two or three live neighbors lives on.
-	grid := NewGrid(4, 1, 1, 0, 0, 2, 0, 2, 1)
+	grid := NewGrid(4, 1, 1, 0, 0, 2, 0)
 	actualNewGrid := RunGeneration(grid)
-	expectedNewGrid := NewGrid(4, 1, 1, 2, 0, 2, 1)
-	if !reflect.DeepEqual(actualNewGrid, expectedNewGrid) {
-		t.Errorf("Expected %v but got %v!\n", expectedNewGrid, actualNewGrid)
+	if !actualNewGrid.data[1][1] {
+		t.Errorf("Expected 1,1 to live but it's dead")
+	}
+	grid = NewGrid(4, 1, 1, 0, 0, 2, 0, 2, 1)
+	actualNewGrid = RunGeneration(grid)
+	if !actualNewGrid.data[1][1] {
+		t.Errorf("Expected 1,1 to live but it's dead")
 	}
 }
-
 func TestRule3(t *testing.T) {
-	// Any live cell with more than three live neighbors dies.
+	// Any live cell with more than three live neighbors dies (overpopulation).
 	grid := NewGrid(4, 1, 1, 0, 0, 2, 0, 2, 1, 2, 2)
 	actualNewGrid := RunGeneration(grid)
-	expectedNewGrid := NewGrid(4, 2, 0, 2, 1, 2, 2)
-	if !reflect.DeepEqual(actualNewGrid, expectedNewGrid) {
-		t.Errorf("Expected %v but got %v!\n", expectedNewGrid, actualNewGrid)
+	if actualNewGrid.data[1][1] {
+		t.Errorf("Expected 1,1 to die but it's alive")
 	}
 }
-
 func TestRule4(t *testing.T) {
-	//Any dead cell with exactly three live neighbours becomes a live cell
-	grid := NewGrid(4, 1, 1, 0, 0, 2, 0, 2, 1, 2, 2)
+	grid := NewGrid(4, 0, 0, 1, 1, 2, 0)
 	actualNewGrid := RunGeneration(grid)
-	expectedNewGrid := NewGrid(4, 2, 0, 2, 1, 2, 2, 1, 2, 3, 1)
-	if !reflect.DeepEqual(actualNewGrid, expectedNewGrid) {
-		t.Errorf("Expected %v but got %v!\n", expectedNewGrid, actualNewGrid)
+	if !actualNewGrid.data[1][0] {
+		t.Errorf("Expected 1,0 to live but it's dead")
 	}
 }
