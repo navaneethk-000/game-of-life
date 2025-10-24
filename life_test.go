@@ -34,9 +34,9 @@ func TestDisplayGrid(t *testing.T) {
 	newGrid.data[0][0] = true
 	actual := DisplayGrid(newGrid)
 	expected :=
-		"* x x \n" +
-			"x x x \n" +
-			"x x x \n"
+		"* - - \n" +
+			"- - - \n" +
+			"- - - \n"
 
 	if actual != expected {
 		t.Errorf("Expected \n%v but got \n%v", expected, actual)
@@ -300,12 +300,6 @@ func TestCountAliveNeighboursMiddle(t *testing.T) {
 	}
 }
 
-//		grid := NewGrid(4, 0, 0, 1, 1, 2, 0)
-//		actualNewGrid := RunGeneration(grid)
-//		if !actualNewGrid.data[1][0] {
-//			t.Errorf("Expected 1,0 to live but it's dead\n")
-//		}
-//	}
 func TestRule1(t *testing.T) {
 	// Any live cell with fewer than two live neighbors dies (underpopulation).
 	grid := NewGrid(4, 1, 1, 0, 0)
@@ -340,10 +334,21 @@ func TestRule3(t *testing.T) {
 		t.Errorf("Expected 1,1 to die but it's alive")
 	}
 }
+
 func TestRule4(t *testing.T) {
 	grid := NewGrid(4, 0, 0, 1, 1, 2, 0)
 	actualNewGrid := RunGeneration(grid)
 	if !actualNewGrid.data[1][0] {
 		t.Errorf("Expected 1,0 to live but it's dead")
+	}
+}
+
+func TestCountAliveNeighboursReturnsZero(t *testing.T) {
+	grid := NewGrid(1)
+	actual := CountAliveNeighbours(grid, 0, 0)
+	expected := uint(0)
+
+	if actual != expected {
+		t.Errorf("Expected %d but got %d", expected, actual)
 	}
 }
