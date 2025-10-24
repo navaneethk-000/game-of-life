@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"strings"
+	"time"
 )
 
 type Grid struct {
@@ -131,7 +132,13 @@ func RunGeneration(grid Grid) Grid {
 
 func main() {
 
-	newGrid := NewGrid(6)
-	fmt.Println(DisplayGrid(newGrid))
-	fmt.Println(CountAliveNeighbours(newGrid, 1, 1))
+	grid := NewGrid(8, 0, 0, 1, 1, 2, 0, 2, 1, 2, 2)
+	fmt.Print(DisplayGrid(grid))
+
+	for {
+		fmt.Print("\033[H\033[2J") //to clear the screen
+		fmt.Print(DisplayGrid(grid))
+		time.Sleep(1 * time.Second)
+		grid = RunGeneration(grid)
+	}
 }
