@@ -37,7 +37,7 @@ func DisplayGrid(grid Grid) string {
 			if i {
 				builder.WriteString("* ")
 			} else {
-				builder.WriteString("x ")
+				builder.WriteString("- ")
 			}
 		}
 		builder.WriteString("\n")
@@ -132,7 +132,7 @@ func RunGeneration(grid Grid) Grid {
 
 func main() {
 
-	grid := NewGrid(8, 0, 0, 1, 1, 2, 0, 2, 1, 2, 2)
+	grid := NewGrid(20, 0, 0, 1, 1, 2, 0, 2, 1, 2, 2)
 	fmt.Print(DisplayGrid(grid))
 
 	for {
