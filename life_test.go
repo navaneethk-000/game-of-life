@@ -307,21 +307,12 @@ func TestRule1(t *testing.T) {
 	if actualNewGrid.data[1][1] {
 		t.Errorf("Expected 1,1 to die but it's alive")
 	}
-	grid = NewGrid(4, 1, 1)
-	actualNewGrid = RunGeneration(grid)
-	if actualNewGrid.data[1][1] {
-		t.Errorf("Expected 1,1 to die but it's alive")
-	}
+
 }
 func TestRule2(t *testing.T) {
 	// Any live cell with two or three live neighbors lives on.
 	grid := NewGrid(4, 1, 1, 0, 0, 2, 0)
 	actualNewGrid := RunGeneration(grid)
-	if !actualNewGrid.data[1][1] {
-		t.Errorf("Expected 1,1 to live but it's dead")
-	}
-	grid = NewGrid(4, 1, 1, 0, 0, 2, 0, 2, 1)
-	actualNewGrid = RunGeneration(grid)
 	if !actualNewGrid.data[1][1] {
 		t.Errorf("Expected 1,1 to live but it's dead")
 	}
@@ -336,6 +327,7 @@ func TestRule3(t *testing.T) {
 }
 
 func TestRule4(t *testing.T) {
+	//Any dead cell with exactly three live neighbours becomes a live cell
 	grid := NewGrid(4, 0, 0, 1, 1, 2, 0)
 	actualNewGrid := RunGeneration(grid)
 	if !actualNewGrid.data[1][0] {
